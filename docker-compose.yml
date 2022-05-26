@@ -1,0 +1,52 @@
+version: '3.9'
+
+networks:
+  dev_network:
+
+services:
+
+  db:
+    build: db
+    ports:
+      - "5432:5432"
+    container_name: users_api_db_main
+    networks:
+      dev_network:
+        aliases:
+          - db-main
+#  app:
+#    build:
+#      context: .
+#      args:
+#        PG_DSN: 'postgresql://admin:1234@db-main:5432/flask_netology'
+#    ports:
+#      - "5000:5000"
+#    container_name: app
+#    depends_on:
+#      - db
+#    networks:
+#      dev_network:
+#        aliases:
+#          - flask_api
+#    restart:
+#      always
+#    volumes:
+#      - ./:/app
+#
+#  tests:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.tests
+#      args:
+#        API_URL: http://flask_api:5000
+#        PG_DSN: 'postgresql://admin:1234@db-main:5432/flask_netology'
+#    depends_on:
+#      - db
+#      - app
+#
+#    networks:
+#      dev_network:
+#        aliases:
+#          - test_client
+#    volumes:
+#      - ./:/app
